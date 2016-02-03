@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+ <html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Computing Rise/Set Times</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/main.css">
+	
+    </head>
+    <body>
+        
+        <div class="container">
+			<div class="row">
+				<div class="col-md-8">
+<h1>How to compute rise/set times and altitude above horizon</h1>
+
+<p>By <b>Paul Schlyter, Stockholm, Sweden</b></p><p>
+email:  <a href="mailto:pausch@stjarnhimlen.se">pausch@stjarnhimlen.se</a> or 
+WWW:    <a href="http://stjarnhimlen.se/">http://stjarnhimlen.se/</a></p><a href="http://www.stjarnhimlen.se/comp/riset.html">Source</a><p>
+</p><p>
+
+
+<ul>
+<li><a href=#1>1. Computing the Sun's altitude above the horizon</a></li>
+<li><a href=#2>2. Computing the Sun's rise/set times</a></li>
+<li><a href=#3>3. Higher accuracy: iteration</a></li>
+<li><a href=#4>4. Computing the Moon's rise/set times</a></li>
+<li><a href=#5>5. Computing rise/set times for other celestial bodies</a></li>
+</ul>
+
+<p><a href="http://www.stjarnhimlen.se/comp/ppcomp.html">How to compute planetary positions</a></p>
+<p><a href="http://www.stjarnhimlen.se/comp/tutorial.html">Tutorial with numerical test cases</a></p>
+</p><p>
+
+<a name="1"><h2>1. Computing the Sun's altitude above the horizon</h2></a>
+
+First we compute the Sun's RA and Decl for this moment, as outlined
+<a href="formulae.html#5">earlier</a>.  Now we need to know our Local
+Sidereal Time.  We start by computing the sidereal time at Greenwich
+at 00:00 Universal Time, let's call this quantity GMST0:</p><p>
+
+<pre>
+    GMST0 = L + 180
+</pre>
+
+L is the Sun's mean longitude, which we compute as:
+
+<pre>
+    <a href="formulae.html#4.1">L = M + w</a>
+</pre>
+
+Note that we express GMST in degrees here to simplify the
+computations.  360 degrees of course corresponds to 24 hours, i.e.
+each hour corresponds to 15 degrees.</p><p>
+
+Now we can compute our Local Sidereal Time (LST):</p><p>
+
+<pre>
+    LST = GMST0 + UT*15.0 + long
+</pre>
+
+UT is the Universal Time, expressed in hours+decimals, the remaining
+quantities are expressed in degrees.  To convert UT to degrees we
+must multiply it by 15 above.  long is our local longitude in
+degrees, where east longitude counts as positive, and west longitude
+as negative.  (this is according to the geographic standard, and
+the recent astronomical standard; if you prefer to use the older
+astronomical standard where west longitude counts as positive, then
+you must change the '+' in front of 'long' to a '-' above).</p><p>
+
+Next let's compute the Sun's Local Hour Angle (LHA), i.e. the angle
+the Earth has turned since the Sun last was in the south:</p><p>
+
+<pre>
+    LHA = LST - RA
+</pre>
+
+A negative hour angle means the Sun hasn't been in the south yet, this
+day.  The angle -10 degrees is of course the same as 350 degrees,
+i.e. adding or subtracting even multiples of 360 degrees does not
+change the angle.</p><p>
+
+We also need to know our latitude (lat), where north latitude
+counts as poisitive and south latitude as negative.  Now we
+can compute the Sun's altitude above the horizon:</p><p>
+
+<pre>
+    sin(h) = sin(lat) * sin(Decl) + cos(lat) * cos(Decl) * cos(LHA)
+</pre>
+
+We compute sin(h), and then take the arcsine of this to get h, the
+Sun's altitude above the horizon.</p><p>
+
+
+<a name="2"><h2>2. Computing the Sun's rise/set times.</h2></a>
+
+This is really the inverse of the previous problem, where we computed
+the Sun's altitude at a specific moment.  Now we want to know at which
+moment the Sun reaches a specific altitude.</p><p>
+
+First we must decide which altitude we're interested in:</p><p>
+
+h = 0 degrees:   Center of Sun's disk touches a mathematical horizon</p><p>
+h = -0.25 degrees:   Sun's upper limb touches a mathematical horizon</p><p>
+
+h = -0.583 degrees:  Center of Sun's disk touches the horizon;
+ atmospheric refraction accounted for</p><p>
+h = -0.833 degrees:  Sun's upper limb touches the horizon;
+ atmospheric refraction accounted for</p><p>
+
+h = -6 degrees: Civil twilight (one can no longer read outside without artificial illumination)</p><p>
+
+h = -12 degrees: Nautical twilight (navigation using a sea horizon no longer possible)</p><p>
+
+h = -15 degrees: Amateur astronomical twilight (the sky is dark enough for most astronomical observations)</p><p>
+
+h = -18 degrees: Astronomical twilight (the sky is completely dark)</p><p>
+
+</p><p>
+
+As you can see, there are several altitides to choose among.  In most
+countries an altitude of -0.833 degrees is used to compute
+sunrise/set times (Sun's upper limb touches the horizon; atmospheric
+refraction accounted for).  One exception is the Swedish national
+alamancs, which use -0.583 degrees (Center of Sun's disk touches the
+horizon; atmospheric refraction accounted for) - however my own
+Swedish almanac <a href="http://www.inova.se">Stjärnhimlen ("The
+Starry Sky")</a> uses the international convention of -0.833
+degrees.</p><p>
+
+
+When we've decided on some value for the altitude above the horizon,
+we start by computing the Sun's RA at noon local time.  When the
+Local Sidereal Time equals the Sun's RA, then the Sun is in the
+south:</p><p>
+
+<pre>
+    LST  =  RA
+</pre>
+
+which yields:</p><p>
+
+<pre>
+    GMST0 + UT*15.0 + long  = RA
+</pre>
+
+Since we know GMST, long, and RA, it's now a simple matter to compute
+UT (GMST0 should also be computed at noon local time):</p><p>
+
+<pre>
+    UT_Sun_in_south = ( RA - GMST0 - long ) / 15.0
+</pre>
+
+Now we're going to compute the Sun's Local Hour Angle (LHA) at
+rise/set (or at twilight, if we've decided to compute the time of
+twilight).  This is the angle the Earth must turn from sunrise to
+noon, or from noon to sunset:</p><p>
+
+<pre>
+                sin(h) - sin(lat)*sin(Decl)
+    cos(LHA) = -----------------------------
+                   cos(lat) * cos(Decl)
+</pre>
+
+If cos(LHA) is less than -1.0, then the Sun is always above our
+altitude limit.  If we were computing rise/set times, the Sun is then
+aboute the horizon continuously; we have Midnight Sun.  Or, if we
+computed a twilight, then the sky never gets dark (a good example is
+Stockholm, Sweden, at midsummer midnight: the Sun then only reaches
+about 7 degrees below the horizon: there will be civil twilight, but
+never nautical or astronomical twilight, at midsummer in
+Stockholm).</p><p>
+
+If cos(LHA) is greater than +1.0, then the Sun is always below our
+altitude limit.  One example is midwinter in the arctics, when the
+Sun never gets above the horizon.</p><p>
+
+If cos(LHA) is between +1.0 and -1.0, then we take the arccos to
+find LHA.  Convert from degrees to hours by dividing by 15.0</p><p>
+
+Now, if we add LHA to UT_Sun_in_south, we get the time of sunset.
+If we subtract LHA from UT_Sun_in_south, we get the time of sunrise.</p><p>
+
+Finally, we convert UT to our local time.</p><p>
+
+
+<a name="3"><h2>3. Higher accuracy: iteration</h2></a>
+
+The method outlined abouve only gives an approximate value of the Sun's
+rise/set times.  The error rarely exceeds one or two minutes, but at
+high latitudes, when the Midnight Sun soon will start or just has ended,
+the errors may be much larger.  If you want higher accuracy, you must
+then iterate, and you must do a separate iteration for sunrise and sunset:</p><p>
+
+a) Compute sunrise or sunset as above, with one exception: to convert
+   LHA from degrees to hours, divide by 15.04107 instead of 15.0 (this
+   accounts for the difference between the solar day and the sidereal
+   day.  You should <i>only</i> use 15.04107 if you intend to iterate;
+   if you don't want to iterate, use 15.0 as before since that will
+   give an approximate correction for the Earth's orbital motion
+   during the day).</p><p>
+
+b) Re-do the computation but compute the Sun's RA and Decl, and also
+   GMST0, for the moment of sunrise or sunset last computed.</p><p>
+
+c) Iterate b) until the computed sunrise or sunset no longer
+   changes significantly.  Usually 2 iterations are enough, in rare
+   cases 3 or 4 iterations may be needed.</p><p>
+
+d) Make sure you iterate towards the sunrise or sunset you want to
+   compute, and not a sunrise or sunset one day earlier or later.
+   If the computed rise or set time is, say, -0.5 hours local time,
+   this means that it really happens at 23:30 <i>the day before</i>.
+   If you get a value exceeding 24 hours local time, it means it happens
+   <i>the day after</i>.  If this is what you want, fine, otherwise add
+   or subtract 24 hours.  This only becomes a problem when there soon
+   will be, or just has been, Midnight Sun.</p><p>
+
+e) Above the arctic circle, there are occasionally two sunrises, or
+   two sunsets, during the same calendar day.  Also there are days when
+   the Sun only sets, or only rises, or neither rises nor sets.  Pay
+   attention to this if you don't want to miss any sunrise or sunset in
+   your computations.</p><p>
+
+f) If you compute twilight instead of rise/set times, e) applies to
+   the "twilight arctic circle".  The normal arctic circle is
+   situated at 66.7 deg latitude N and S (65.9 deg if one accounts
+   for atmospheric refraction and the size of the solar disk).
+   The "twilight arctic circle" is situated 6, 12, 15 or 18 deg
+   closer to the equator, i.e. at latitude 60.7, 54.7, 51.7 or 48.7
+   degrees, depending on which twilight you're computing.</p><p>
+
+
+
+<a name="4"><h2>4. Computing the Moon's rise/set times.</h2></a>
+
+This is really done the same way as the Sun's rise/set times, the
+only difference being that you should compute the RA and Decl for the
+Moon and not for the Sun.  However, the Moon moves quickly and its
+rise/set times may change one or even two hours from one day to the
+next.  If you don't iterate the Moon's rise/set times, you may get
+results which are in error by up to an hour, or more.</p><p>
+
+Another thing to consider is the lunar parallax, which affects the
+Moon's rise/set time by several minutes or more.  One way to deal
+with the lunar parallax is to always use the Moon's topocentric
+RA and Decl.  Another, simpler, way is to use the Moon's geocentric
+RA and Decl and instead adjust h, the rise/set altitude, by decreasing
+it by m_par, the lunar parallax.  If you want to compute rise/set
+times for the Moon's upper limb rather than the center of the Moon's
+disk, you also need to compute m_sd, the semi-diameter or apparent
+radius of the Moon's disk in the sky. Note that the Moon's upper limb
+may for some lunar phases and circumstances be on the dark part of the
+Moon's disk</p><p>
+
+Thus you choose your h for Moon rise/set computation like this:</p><p>
+
+h = -m_par:  Center of Moon's disk touches a mathematical horizon</p><p>
+h = -(m_par+m_sd):  Moon's upper limb touches a mathematical horizon</p><p>
+h = -0.583 degrees - m_par:  Center of Moon's disk touches the horizon;
+ atmospheric refraction accounted for</p><p>
+h = -0.583 degrees - (m_par+m_sd):  Moon's upper limb touches the horizon;
+ atmospheric refraction accounted for</p><p>
+</p><p>
+
+Yet another thing to consider: the Sun is always in the south near 12:00
+local time, but the Moon may be in the south at any time of the day
+(or night).  This means you must pay more attention that you're
+really iterating towards the rise or set time you want, and not some
+rise/set time one day earlier, or later.</p><p>
+
+Since the Moon rises and sets on the average 50 minutes later each
+day, there usually will be one day each month when the Moon never
+rises, and another day when it never sets.  You must have this in
+mind when iterating your rise/set times, otherwise your program
+may easily get caught into an infinite loop when it tries to force
+e.g. a rise time between 00:00 and 24:00 local time on a day when
+the Moon never rises.</p><p>
+
+At high latitudes the Moon occasionally rises, or sets, twice on a
+single calendar day.  This may happen above the "lunar arctic
+circle", which moves between 61.5 and 71.9 deg latitude during the
+18-year period of the motion of the lunar nodes.  You may want to pay
+attention to this.</p><p>
+
+Yes, computing the Moon's rise/set times is unfortunately messy, much
+due to its quick orbital motion around the Earth.</p><p>
+
+
+
+<a name="5"><h2>5. Computing rise/set times for other celestial bodies.</h2></a>
+
+This is done the same way as for the Sun, with some differences:</p><p>
+
+a) Compute the RA and Decl for that body instead of for the Sun.  If
+the body is a star, get its RA and Decl from a suitable star catalog.</p><p>
+
+b) GMST0 is still needed, so you should compute the Sun's mean longitude.</p><p>
+
+c) <i>Always</i> use 15.04107 instead of 15.0 when converting LHA from
+degrees to hours.</p><p>
+
+Since the planets move much slower than the Moon, and the stars
+hardly move at all, one need not iterate.  If one wants high
+accuracy, one may find it worthwhile to iterate the rise/set times
+for Mercury, Venus and Mars (these are the planets that move most
+quickly).</p><p>				
+				</div>
+		</div>       
+
+
+    </body>
+</html>

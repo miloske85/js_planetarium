@@ -1,0 +1,951 @@
+var stars = [
+	{
+		name:"Alpheratz",
+		constellation:"Alpha Andromedae",
+		RA:0.139768888889,
+		DEC:29.0908280556,
+		PMRA:135.68,
+		PMDEC:-162.95,
+		starClass:"B9p",
+		mag:2.07
+	},
+	{
+		name:"Caph",
+		constellation:"Beta Cassiopeiae",
+		RA:0.152802694444,
+		DEC:59.1502180556,
+		PMRA:523.39,
+		PMDEC:-180.42,
+		starClass:"F2III-IV",
+		mag:2.28
+	},
+	{
+		name:"Ankaa",
+		constellation:"Aplha Phoenicis",
+		RA:0.438018722222,
+		DEC:-41.6948780556,
+		PMRA:232.76,
+		PMDEC:-353.64,
+		starClass:"K0III...",
+		mag:2.4
+	},
+	{
+		name:"Schedar",
+		constellation:"Alpha Cassiopeiae",
+		RA:0.675107555556,
+		DEC:56.5374091667,
+		PMRA:50.36,
+		PMDEC:-32.17,
+		starClass:"K0II-IIIvar",
+		mag:2.24
+	},
+	{
+		name:"Diphda",
+		constellation:"Beta Ceti",
+		RA:0.726452305556,
+		DEC:-16.0133158333,
+		PMRA:232.79,
+		PMDEC:32.71,
+		starClass:"K0III",
+		mag:2.04
+	},
+	{
+		name:"G Cas",
+		constellation:"Gamma Cassiopeiae",
+		RA:0.945139194444,
+		DEC:60.7167497222,
+		PMRA:25.65,
+		PMDEC:-3.82,
+		starClass:"B0IV:evar",
+		mag:2.15
+	},
+	{
+		name:"Mirach",
+		constellation:"Beta Andromedae",
+		RA:1.162166,
+		DEC:35.6208305556,
+		PMRA:175.59,
+		PMDEC:-112.23,
+		starClass:"M0IIIvar",
+		display: true,
+		mag:2.07
+	},
+	{
+		name:"Achenar",
+		constellation:"Alpha Eridani",
+		RA:1.62854213889,
+		DEC:-56.76334,
+		PMRA:88.02,
+		PMDEC:-40.08,
+		starClass:"B3Vp",
+		mag:0.45
+	},
+	{
+		name:"Almach",
+		constellation:"Gamma Andromedae",
+		RA:2.06497752778,
+		DEC:42.3298483333,
+		PMRA:43.08,
+		PMDEC:-50.85,
+		starClass:"B8V",
+		mag:2.1
+	},
+	{
+		name:"Hamal",
+		constellation:"Alpha Arietis",
+		RA:2.11952383333,
+		DEC:23.4627775,
+		PMRA:190.73,
+		PMDEC:-145.77,
+		starClass:"K2III",
+		display: true,
+		mag:2.01
+	},
+	{
+		name:"Polaris",
+		constellation:"Alpha Ursae Minoris",
+		RA:2.52974313889,
+		DEC:89.2641380556,
+		PMRA:44.22,
+		PMDEC:-11.74,
+		starClass:"F7:Ib-IIv SB",
+		mag:1.97
+	},
+	{
+		name:"Algol",
+		constellation:"Beta Persei",
+		RA:3.13614713889,
+		DEC:40.9556511111,
+		PMRA:2.39,
+		PMDEC:-1.44,
+		starClass:"B8V",
+		display: true,
+		mag:2.09
+	},
+	{
+		name:"Mirphak",
+		constellation:"Alpha Persei",
+		RA:3.40537458333,
+		DEC:49.8612427778,
+		PMRA:24.11,
+		PMDEC:-26.01,
+		starClass:"F5Ib",
+		mag:1.79
+	},
+	{
+		name:"Aldebaran",
+		constellation:"Alpha Tauri",
+		RA:4.59866680556,
+		DEC:16.5097616667,
+		PMRA:62.78,
+		PMDEC:-189.36,
+		starClass:"K5III",
+		display: true,
+		mag:0.87
+	},
+	{
+		name:"Rigel",
+		constellation:"Beta Orionis",
+		RA:5.24229755556,
+		DEC:-7.79836083333,
+		PMRA:1.87,
+		PMDEC:-0.56,
+		starClass:"B8Ia",
+		mag:0.18
+	},
+	{
+		name:"Capella",
+		constellation:"Alpha Aurigae",
+		RA:5.27813766667,
+		DEC:45.9990291667,
+		PMRA:75.52,
+		PMDEC:-427.13,
+		starClass:"M1: comp",
+		display: true,
+		mag:0.08
+	},
+	{
+		name:"Bellatrix",
+		constellation:"Gamma Orionis",
+		RA:5.41885227778,
+		DEC:6.34973444444,
+		PMRA:-8.75,
+		PMDEC:-13.28,
+		starClass:"B2III",
+		mag:1.64
+	},
+	{
+		name:"Alnath",
+		constellation:"Beta Tauri",
+		RA:5.43819386111,
+		DEC:28.6078733333,
+		PMRA:23.28,
+		PMDEC:-174.22,
+		starClass:"B7III",
+		mag:1.65
+	},
+	{
+		name:"Mintaka",
+		constellation:"Delta Orionis",
+		RA:5.53344436111,
+		DEC:0.299093333333,
+		PMRA:1.67,
+		PMDEC:0.56,
+		starClass:"O9.5II",
+		mag:2.25
+	},
+	{
+		name:"Alnilam",
+		constellation:"Epsilon Orionis",
+		RA:5.60355905556,
+		DEC:-0.798082777778,
+		PMRA:1.49,
+		PMDEC:-1.06,
+		starClass:"B0Ia",
+		mag:1.69
+	},
+	{
+		name:"Alnitak",
+		constellation:"Zeta Orionis",
+		RA:5.67931244444,
+		DEC:-0.0574216666667,
+		PMRA:3.99,
+		PMDEC:2.54,
+		starClass:"O9.5Ib SB",
+		mag:1.74
+	},
+	{
+		name:"Saiph",
+		constellation:"Kappa Orionis",
+		RA:5.79594108333,
+		DEC:-8.33039805556,
+		PMRA:1.55,
+		PMDEC:-1.2,
+		starClass:"B0.5Iavar",
+		mag:2.07
+	},
+	{
+		name:"Betelgeuse",
+		constellation:"Alpha Orionis",
+		RA:5.91952477778,
+		DEC:7.40703638889,
+		PMRA:27.33,
+		PMDEC:10.86,
+		starClass:"M2Ib",
+		display: true,
+		mag:0.45
+	},
+	{
+		name:"Menkalinan",
+		constellation:"Beta Aurigae",
+		RA:5.99215816667,
+		DEC:44.947435,
+		PMRA:-56.41,
+		PMDEC:-0.88,
+		starClass:"A2V",
+		mag:1.9
+	},
+	{
+		name:"Mirza",
+		constellation:"Beta Canis Majoris",
+		RA:6.37832983333,
+		DEC:-16.0440833333,
+		PMRA:-3.45,
+		PMDEC:-0.47,
+		starClass:"B1II/III",
+		mag:1.98
+	},
+	{
+		name:"Canopus",
+		constellation:"Alpha Carinae",
+		RA:6.39919183333,
+		DEC:-51.3042819444,
+		PMRA:19.99,
+		PMDEC:23.67,
+		starClass:"F0Ib",
+		mag:-0.62
+	},
+	{
+		name:"Alhena",
+		constellation:"Gamma Geminorum",
+		RA:6.62852841667,
+		DEC:16.3994147222,
+		PMRA:-2.04,
+		PMDEC:-66.92,
+		starClass:"A0IV",
+		mag:1.93
+	},
+	{
+		name:"Sirius",
+		constellation:"Alpha Canis Majoris",
+		RA:6.75256941667,
+		DEC:-15.2868569444,
+		PMRA:-546.01,
+		PMDEC:-1223.08,
+		starClass:"A0m...",
+		display: true,
+		mag:-1.44
+	},
+	{
+		name:"Adhara",
+		constellation:"Epsilon Canis Majoris",
+		RA:6.97709630556,
+		DEC:-27.0279105556,
+		PMRA:2.63,
+		PMDEC:2.29,
+		starClass:"B2II",
+		mag:1.5
+	},
+	{
+		name:"Delta CMa",
+		constellation:"Delta Canis Majoris",
+		RA:7.13985722222,
+		DEC:-25.6067922222,
+		PMRA:-2.75,
+		PMDEC:3.33,
+		starClass:"F8Ia",
+		mag:1.83
+	},
+	{
+		name:"Aludra",
+		constellation:"Eta Canis Majoris",
+		RA:7.40158472222,
+		DEC:-28.6968802778,
+		PMRA:-3.76,
+		PMDEC:6.66,
+		starClass:"B5Ia",
+		mag:2.45
+	},
+	{
+		name:"Castor",
+		constellation:"Alpha Geminorum",
+		RA:7.57666794444,
+		DEC:31.8886363889,
+		PMRA:-206.33,
+		PMDEC:-148.18,
+		starClass:"A2Vm",
+		mag:1.58
+	},
+	{
+		name:"Procyon",
+		constellation:"Alpha Canis Minoris",
+		RA:7.65514947222,
+		DEC:5.22750777778,
+		PMRA:-716.57,
+		PMDEC:-1034.58,
+		starClass:"F5IV-V",
+		display: true,
+		mag:0.4
+	},
+	{
+		name:"Pollux",
+		constellation:"Beta Geminorum",
+		RA:7.75537883333,
+		DEC:28.0263102778,
+		PMRA:-625.69,
+		PMDEC:-45.95,
+		starClass:"K0IIIvar",
+		display: true,
+		mag:1.16
+	},
+	{
+		name:"Naos",
+		constellation:"Zeta Puppis",
+		RA:8.05974169444,
+		DEC:-39.9968116667,
+		PMRA:-30.82,
+		PMDEC:16.77,
+		starClass:"O5IAf",
+		display: true,
+		mag:2.21
+	},
+	{
+		name:"Gamma Vel",
+		constellation:"Gamma Velorum",
+		RA:8.15887647222,
+		DEC:-46.6633883333,
+		PMRA:-5.93,
+		PMDEC:9.9,
+		starClass:"WC8 + O9I",
+		mag:1.75
+	},
+	{
+		name:"Avior",
+		constellation:"Epsilon Carinae",
+		RA:8.37524019444,
+		DEC:-58.4904616667,
+		PMRA:-25.34,
+		PMDEC:22.72,
+		starClass:"K3III+B2V",
+		mag:1.86
+	},
+	{
+		name:"Delta Vel",
+		constellation:"Delta Velorum",
+		RA:8.74505480556,
+		DEC:-53.2914319444,
+		PMRA:28.78,
+		PMDEC:-104.14,
+		starClass:"A1V",
+		mag:1.93
+	},
+	{
+		name:"Lambda Vel",
+		constellation:"Lambda Velorum",
+		RA:9.13327141667,
+		DEC:-42.5673758333,
+		PMRA:-23.21,
+		PMDEC:14.28,
+		starClass:"K4Ib-II",
+		mag:2.23
+	},
+	{
+		name:"Beta Car",
+		constellation:"Beta Carinae",
+		RA:9.22006688889,
+		DEC:-68.2825275,
+		PMRA:-157.66,
+		PMDEC:108.91,
+		starClass:"A2IV",
+		mag:1.67
+	},
+	{
+		name:"Iota Car",
+		constellation:"Iota Carinae",
+		RA:9.28484122222,
+		DEC:-58.7247388889,
+		PMRA:-19.03,
+		PMDEC:13.11,
+		starClass:"A8Ib",
+		mag:2.21
+	},
+	{
+		name:"Kappa Vel",
+		constellation:"Kappa Velorum",
+		RA:9.36856366667,
+		DEC:-54.9893047222,
+		PMRA:-10.72,
+		PMDEC:11.24,
+		starClass:"B2IV",
+		mag:2.47
+	},
+	{
+		name:"Alphard",
+		constellation:"Alpha Hydrae",
+		RA:9.45979216667,
+		DEC:-7.34131666667,
+		PMRA:-14.49,
+		PMDEC:33.25,
+		starClass:"K3III",
+		mag:1.99
+	},
+	{
+		name:"Regulus",
+		constellation:"Alpha Leonis",
+		RA:10.1395720556,
+		DEC:11.967195,
+		PMRA:-249.4,
+		PMDEC:4.91,
+		starClass:"B7V",
+		mag:1.36
+	},
+	{
+		name:"Algieba",
+		constellation:"Gamma Leonis",
+		RA:10.3328226944,
+		DEC:19.8418602778,
+		PMRA:310.77,
+		PMDEC:-152.88,
+		starClass:"K0III",
+		mag:2.01
+	},
+	{
+		name:"Merak",
+		constellation:"Beta Ursae Majoris",
+		RA:11.0306641111,
+		DEC:56.3823447222,
+		PMRA:81.66,
+		PMDEC:33.74,
+		starClass:"A1V",
+		mag:2.34
+	},
+	{
+		name:"Dubhe",
+		constellation:"Alpha Ursae Majoris",
+		RA:11.0621769167,
+		DEC:61.7511188889,
+		PMRA:-136.46,
+		PMDEC:-35.25,
+		starClass:"F7V comp",
+		display: true,
+		mag:1.81
+	},
+	{
+		name:"Denebola",
+		constellation:"Beta Leonis",
+		RA:11.8177439722,
+		DEC:14.5723369444,
+		PMRA:-499.02,
+		PMDEC:-113.78,
+		starClass:"A3Vvar",
+		mag:2.14
+	},
+	{
+		name:"Phad",
+		constellation:"Gamma Ursae Majoris",
+		RA:11.8971503611,
+		DEC:53.6947330556,
+		PMRA:107.76,
+		PMDEC:11.16,
+		starClass:"A0V SB",
+		mag:2.41
+	},
+	{
+		name:"Acrux",
+		constellation:"Alpha Crucis",
+		RA:12.4433170556,
+		DEC:-62.9009441667,
+		PMRA:-35.37,
+		PMDEC:-14.73,
+		starClass:"B0.5IV",
+		mag:0.77
+	},
+	{
+		name:"Gacrux",
+		constellation:"Gamma Crucis",
+		RA:12.5194248056,
+		DEC:-56.8874308333,
+		PMRA:27.94,
+		PMDEC:-264.33,
+		starClass:"M4III",
+		mag:1.59
+	},
+	{
+		name:"Muhlifain",
+		constellation:"Gamma Centauri",
+		RA:12.6920013889,
+		DEC:-47.0401144444,
+		PMRA:-187.28,
+		PMDEC:-1.2,
+		starClass:"A1IV",
+		mag:2.2
+	},
+	{
+		name:"Becrux",
+		constellation:"Beta Crucis",
+		RA:12.7953663611,
+		DEC:-58.3112675,
+		PMRA:-48.24,
+		PMDEC:-12.82,
+		starClass:"B0.5III",
+		mag:1.25
+	},
+	{
+		name:"Alioth",
+		constellation:"Epsilon Ursae Majoris",
+		RA:12.9004536111,
+		DEC:55.9598430556,
+		PMRA:111.74,
+		PMDEC:-8.99,
+		starClass:"A0p",
+		mag:1.76
+	},
+	{
+		name:"Mizar",
+		constellation:"Zeta Ursae Majoris",
+		RA:13.3987277222,
+		DEC:54.9254152778,
+		PMRA:121.23,
+		PMDEC:-22.01,
+		starClass:"A2V",
+		mag:2.23
+	},
+	{
+		name:"Spica",
+		constellation:"Alpha Virginis",
+		RA:13.4198901667,
+		DEC:-10.838755,
+		PMRA:-42.5,
+		PMDEC:-31.73,
+		starClass:"B1V",
+		display: true,
+		mag:0.98
+	},
+	{
+		name:"Epsilon Cen",
+		constellation:"Epsilon Centauri",
+		RA:13.6647979722,
+		DEC:-52.5336372222,
+		PMRA:-14.6,
+		PMDEC:-12.79,
+		starClass:"B1III",
+		mag:2.29
+	},
+	{
+		name:"Alkaid",
+		constellation:"Eta Ursae Majoris",
+		RA:13.7923739167,
+		DEC:49.3133027778,
+		PMRA:-121.23,
+		PMDEC:-15.56,
+		starClass:"B3V SB",
+		mag:1.85
+	},
+	{
+		name:"Agena",
+		constellation:"Beta Centauri",
+		RA:14.0637346111,
+		DEC:-59.6270216667,
+		PMRA:-33.96,
+		PMDEC:-25.06,
+		starClass:"B1III",
+		mag:0.61
+	},
+	{
+		name:"Theta Cen",
+		constellation:"Theta Centauri",
+		RA:14.1114790833,
+		DEC:-35.6313041667,
+		PMRA:-519.29,
+		PMDEC:-517.87,
+		starClass:"K0IIIb",
+		mag:2.06
+	},
+	{
+		name:"Arcturus",
+		constellation:"Alpha Bootis",
+		RA:14.2612076111,
+		DEC:19.18727,
+		PMRA:-1093.45,
+		PMDEC:-1999.4,
+		starClass:"K2IIIp",
+		display: true,
+		mag:-0.05
+	},
+	{
+		name:"Eta Cen",
+		constellation:"Eta Centauri",
+		RA:14.5917921111,
+		DEC:-41.8422544444,
+		PMRA:-35.31,
+		PMDEC:-32.44,
+		starClass:"B1Vn + A",
+		mag:2.33
+	},
+	{
+		name:"Alpha Cen B",
+		constellation:"Alpha Centauri B",
+		RA:14.6609418889,
+		DEC:-59.1605286111,
+		PMRA:-3600.35,
+		PMDEC:952.11,
+		starClass:"K1V",
+		mag:1.35
+	},
+	{
+		name:"Alpha Cen A",
+		constellation:"Alpha Centauri A",
+		RA:14.6613606944,
+		DEC:-59.1648530556,
+		PMRA:-3678.19,
+		PMDEC:481.84,
+		starClass:"G2V",
+		mag:-0.01
+	},
+	{
+		name:"Alpha Lup",
+		constellation:"Alpha Lupi",
+		RA:14.6988260556,
+		DEC:-46.6118586111,
+		PMRA:-21.15,
+		PMDEC:-24.22,
+		starClass:"B1.5III",
+		mag:2.3
+	},
+	{
+		name:"Izar",
+		constellation:"Epsilon Bootis",
+		RA:14.7497919167,
+		DEC:27.0741738889,
+		PMRA:-50.65,
+		PMDEC:20.0,
+		starClass:"A0",
+		mag:2.35
+	},
+	{
+		name:"Kochab",
+		constellation:"Beta Ursae Minoris",
+		RA:14.8451098333,
+		DEC:74.1554758333,
+		PMRA:-32.29,
+		PMDEC:11.91,
+		starClass:"K4IIIvar",
+		display: true,
+		mag:2.07
+	},
+	{
+		name:"Gemma",
+		constellation:"Alpha Coronae Borealis",
+		RA:15.5781081944,
+		DEC:26.7149102778,
+		PMRA:120.38,
+		PMDEC:-89.44,
+		starClass:"A0V",
+		mag:2.22
+	},
+	{
+		name:"Dschuba",
+		constellation:"Delta Scorpii",
+		RA:16.0055588056,
+		DEC:-21.3783797222,
+		PMRA:-8.67,
+		PMDEC:-36.9,
+		starClass:"B0.2IV",
+		mag:2.29
+	},
+	{
+		name:"Antares",
+		constellation:"Alpha Scorpii",
+		RA:16.4901298611,
+		DEC:-25.5680538889,
+		PMRA:-10.16,
+		PMDEC:-23.21,
+		starClass:"M1Ib + B2.5V",
+		display: true,
+		mag:1.06
+	},
+	{
+		name:"Atria",
+		constellation:"Alpha Trianguli Australis",
+		RA:16.8110738333,
+		DEC:-68.972365,
+		PMRA:17.85,
+		PMDEC:-32.92,
+		starClass:"K2IIb-IIIa",
+		mag:1.91
+	},
+	{
+		name:"Epsilon Sco",
+		constellation:"Epsilon Scorpii",
+		RA:16.8361791667,
+		DEC:-33.7073902778,
+		PMRA:-611.83,
+		PMDEC:-255.87,
+		starClass:"K2IIIb",
+		mag:2.29
+	},
+	{
+		name:"Sabik",
+		constellation:"Eta Ophiuchi",
+		RA:17.1729617778,
+		DEC:-14.2748525,
+		PMRA:41.16,
+		PMDEC:97.65,
+		starClass:"A2.5Va",
+		mag:2.43
+	},
+	{
+		name:"Shaula",
+		constellation:"Lambda Scorpii",
+		RA:17.56014625,
+		DEC:-36.8962516667,
+		PMRA:-8.9,
+		PMDEC:-29.95,
+		starClass:"B1.5IV+...",
+		mag:1.62
+	},
+	{
+		name:"Rasalhague",
+		constellation:"Alpha Ophiuchi",
+		RA:17.5822235556,
+		DEC:12.5605758333,
+		PMRA:110.08,
+		PMDEC:-222.61,
+		starClass:"A5III",
+		mag:2.08
+	},
+	{
+		name:"Sargas",
+		constellation:"Thega Scorpii",
+		RA:17.6219793889,
+		DEC:-41.0021783333,
+		PMRA:6.06,
+		PMDEC:-0.95,
+		starClass:"F1II",
+		mag:1.86
+	},
+	{
+		name:"Kappa Sco",
+		constellation:"Kappa Scorpii",
+		RA:17.7081332778,
+		DEC:-38.9700791667,
+		PMRA:-6.49,
+		PMDEC:-25.55,
+		starClass:"B1.5III",
+		mag:2.39
+	},
+	{
+		name:"Etamin",
+		constellation:"Gamma Draconis",
+		RA:17.9434383056,
+		DEC:51.4889511111,
+		PMRA:-8.52,
+		PMDEC:-23.05,
+		starClass:"K5III",
+		mag:2.24
+	},
+	{
+		name:"Epsilon Sag",
+		constellation:"Epsilon Sagittarii",
+		RA:18.4028739722,
+		DEC:-33.6156852778,
+		PMRA:-39.61,
+		PMDEC:-124.05,
+		starClass:"B9.5III",
+		mag:1.79
+	},
+	{
+		name:"Vega",
+		constellation:"Alpha Lyrae",
+		RA:18.6156072222,
+		DEC:38.7829930556,
+		PMRA:201.02,
+		PMDEC:287.46,
+		starClass:"A0Vvar",
+		display: true,
+		mag:0.03
+	},
+	{
+		name:"Nunki",
+		constellation:"Sigma Sagittarii",
+		RA:18.9210879722,
+		DEC:-25.7034058333,
+		PMRA:13.87,
+		PMDEC:-52.65,
+		starClass:"B2.5V",
+		mag:2.05
+	},
+	{
+		name:"Altair",
+		constellation:"Alpha Aquillae",
+		RA:19.8463005833,
+		DEC:8.867385,
+		PMRA:536.82,
+		PMDEC:385.54,
+		starClass:"A7IV-V",
+		display: true,
+		mag:0.76
+	},
+	{
+		name:"Sadr",
+		constellation:"Gamma Cygni",
+		RA:20.3704722222,
+		DEC:40.2566813889,
+		PMRA:2.43,
+		PMDEC:-0.93,
+		starClass:"F8Ib",
+		mag:2.23
+	},
+	{
+		name:"Peacock",
+		constellation:"Alpha Pavonis",
+		RA:20.4274582222,
+		DEC:-55.2651191667,
+		PMRA:7.71,
+		PMDEC:-86.15,
+		starClass:"B2IV",
+		mag:1.94
+	},
+	{
+		name:"Deneb",
+		constellation:"Alpha Cygni",
+		RA:20.6905315,
+		DEC:45.2803341667,
+		PMRA:1.56,
+		PMDEC:1.55,
+		starClass:"A2Ia",
+		display: true,
+		mag:1.25
+	},
+	{
+		name:"Gienah",
+		constellation:"Epsilon Cygni",
+		RA:20.7701200556,
+		DEC:33.9694533333,
+		PMRA:356.16,
+		PMDEC:330.28,
+		starClass:"K0III",
+		mag:2.48
+	},
+	{
+		name:"Alderamin",
+		constellation:"Alpha Cephei",
+		RA:21.309606,
+		DEC:62.5854552778,
+		PMRA:149.91,
+		PMDEC:48.27,
+		starClass:"A7IV-V",
+		mag:2.45
+	},
+	{
+		name:"Enif",
+		constellation:"Epsilon Pegasi",
+		RA:21.7364278611,
+		DEC:9.87500777778,
+		PMRA:30.02,
+		PMDEC:1.38,
+		starClass:"K2Ibvar",
+		mag:2.38
+	},
+	{
+		name:"Alpha Gru",
+		constellation:"Alpha Gruis",
+		RA:22.1371878889,
+		DEC:-45.0393841667,
+		PMRA:127.6,
+		PMDEC:-147.91,
+		starClass:"B7IV",
+		mag:1.73
+	},
+	{
+		name:"Beta Gru",
+		constellation:"Beta Gruis",
+		RA:22.7110930278,
+		DEC:-45.1154341667,
+		PMRA:135.68,
+		PMDEC:-4.51,
+		starClass:"M5III",
+		mag:2.07
+	},
+	{
+		name:"Fomalhaut",
+		constellation:"Alpha Piscis Austrini",
+		RA:22.9607848889,
+		DEC:-28.3781630556,
+		PMRA:329.22,
+		PMDEC:-164.22,
+		starClass:"A3V",
+		display: true,
+		mag:1.17
+	},
+	{
+		name:"Scheat",
+		constellation:"Beta Pegasi",
+		RA:23.0628703889,
+		DEC:28.0824547222,
+		PMRA:187.76,
+		PMDEC:137.61,
+		starClass:"M2II-IIIvar",
+		mag:2.44
+	},
+	{
+		name:"Markab",
+		constellation:"Alpha Pegasi",
+		RA:23.079338,
+		DEC:15.2053677778,
+		PMRA:61.1,
+		PMDEC:-42.56,
+		starClass:"B9.5III",
+		mag:2.49
+	}
+];

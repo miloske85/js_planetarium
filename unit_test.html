@@ -1,0 +1,90 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Unit Testing</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/patch.css">
+		
+		<style>
+			.ut-success span, .ut-failure span{
+				padding: 2px;
+				border-radius: 2px;
+				color: #ffd;
+			}
+			.ut-success{
+				color: #080;
+			}
+			.ut-success span{
+				background-color: #080;
+			}
+			.ut-failure{
+				color: #d00;
+			}
+			.ut-failure span{
+				background-color: #900;
+			}
+		</style>
+		
+    </head>
+    <body>
+	<header role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" id="top-banner">
+					<h1 class="text-center" id="main-title">UNIT TESTS</h1>
+					<h1>&nbsp;</h1>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div id="test-placeholder"></div>				
+			</div>
+			<div class="col-md-6">
+				<div id="trial-placeholder"></div>
+			</div>
+		</div>
+	</div>
+    
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<h4>Links:</h4>
+					<ul class="list-unstyled">
+						<li><a href="formulae.html">Formulae</a></li>
+						<li><a href="riset-formulae.html">Rise-Set Formulae</a></li>
+						<li><a href="tutorial-formulae.html">Tutorial</a></li>
+					</ul>
+					<span class="h3">&nbsp;</span>
+				</div>
+				<div class="col-md-8">
+					<span class="h1">&nbsp;</span>
+					<p class="text-center">Planetarium by Milos</p>
+					<p class="text-center">&copy; 2015</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+<script src="js/vendor/polyfill.js"></script>
+	
+<script src="js/modules/stars.js"></script>
+
+<script src="js/modules/astronomy_class.js"></script>
+<script src="js/modules/star_class.js"></script>
+<script src="js/modules/planet_class.js"></script>
+
+<script src="js/unittesting.js"></script>
+
+</body>
+</html>

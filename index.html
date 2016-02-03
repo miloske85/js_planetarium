@@ -1,0 +1,141 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/patch.css">
+		
+    </head>
+    <body>
+	<header role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12" id="top-banner">
+					<h1 class="text-center" id="main-title">PLANETS</h1>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>&nbsp;</h2>
+				<span class="text-center">
+					<span id="time-button-controls">
+						<button class="btn btn-primary" id="btn-now">Now</button>
+						<button class="btn btn-primary" id="btn-minus-hour">-1h</button>
+						<button class="btn btn-primary" id="btn-plus-hour">+1h</button>
+						<button class="btn btn-primary" id="btn-minus-day">-1d</button>
+						<button class="btn btn-primary" id="btn-plus-day">+1d</button>
+						<button class="btn btn-primary" id="btn-minus-month">-1 mo</button>
+						<button class="btn btn-primary" id="btn-plus-month">+1 mo</button>
+					</span>
+					&nbsp;
+					&nbsp;
+					<button class="btn btn-default" id="btn-planets">Planets</button>
+					<button class="btn btn-default" id="btn-stars">Stars</button>
+				</span>
+			</div>
+		</div>
+		<div id="placeholder"></div>
+		<div class="row">
+			<div class="col-md-12">
+				<h5>&nbsp;</h5>
+				<div id="time-form-wrapper">
+					<label for="time-form">Jump to any time</label>
+					<form class="form form-inline" id="time-form" action="#">
+						<label for="date-input">Date</label>
+						<input type="text" class="form-control" id="date-input" size="3">
+						
+						<label for="month-input">Month</label>
+						<select id="month-input" class="form-control">
+							<option>Select Month</option>
+							<option value="0">January</option>
+							<option value="1">February</option>
+							<option value="2">March</option>
+							<option value="3">April</option>
+							<option value="4">May</option>
+							<option value="5">June</option>
+							<option value="6">July</option>
+							<option value="7">August</option>
+							<option value="8">September</option>
+							<option value="9">October</option>
+							<option value="10">November</option>
+							<option value="11">December</option>
+						</select>
+						
+						<label for="year-input">Year</label>
+						<input type="text" class="form-control" id="year-input" size="5">	
+
+						<label for="hour-input">Hour</label>
+						<input type="text" class="form-control" id="hour-input" size="3">
+						
+						<label for="minute-input">Minute</label>
+						<input type="text" class="form-control" id="minute-input" size="3">
+						
+						<label for="second-input">Second</label>
+						<input type="text" class="form-control" id="second-input" size="3">
+						
+						<input type="submit" class="btn btn-primary" value="submit">
+					</form>
+				</div>
+				<div id="location-form-wrapper">
+					<label for="location-form">Geographical Location</label>
+					<form class="form form-inline" id="location-form" action="#">
+						<label for="latitude-input">Latitude</label>
+						<input type="text" class="form-control" id="latitude-input">
+						
+						<label for="longitude-input">Longitude</label>
+						<input type="text" class="form-control" id="longitude-input">
+						
+						<input type="submit" class="btn btn-primary" value="submit">
+					</form>
+				</div>
+				<h1>&nbsp;</h1>
+			</div>
+		</div>
+	</div>
+    
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<h4>Links:</h4>
+					<ul class="list-unstyled">
+						<li><a href="formulae.html">Formulae</a></li>
+						<li><a href="riset-formulae.html">Rise-Set Formulae</a></li>
+						<li><a href="tutorial-formulae.html">Tutorial</a></li>
+					</ul>
+					<span class="h3">&nbsp;</span>
+				</div>
+				<div class="col-md-8">
+					<span class="h1">&nbsp;</span>
+					<p class="text-center">Planetarium by Milos</p>
+					<p class="text-center">&copy; 2015</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+<script src="js/vendor/polyfill.js"></script>
+	
+<script src="js/modules/stars.js"></script>
+
+<script src="js/modules/astronomy_class.js"></script>
+<script src="js/modules/star_class.js"></script>
+<script src="js/modules/planet_class.js"></script>
+
+<script src="js/main_stars.js"></script>
+<script src="js/main_planets.js"></script>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

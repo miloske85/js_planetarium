@@ -1,0 +1,11 @@
+#time-form-wrapper, #location-form-wrapper{
+	border: 1px solid #aaa;
+	margin: 10px;
+	padding: 5px;
+	display: inline;
+	float: left;
+}
+
+#ephem-name{
+	text-transform: capitalize;
+}
